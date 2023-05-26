@@ -2,7 +2,12 @@ from typing import List
 
 
 class Solution:
-    def longestCommonPrefix(self, strs: List[str]) -> str:
+    # approach 2
+    # compare first and second strings, get common prefix
+    # use the common prefix to compare with 3rd string, get common prefix
+    # use that for comparing with 4th string, get common prefix,
+    # repeat the process
+    def longestCommonPrefix_2(self, strs: List[str]) -> str:
         prev = strs[0]
         for i in range(len(strs) - 1):
             next = ""
@@ -13,3 +18,14 @@ class Solution:
                     break
             prev = next
         return prev
+
+    # compare characters of first string with characters from other strings
+    # fail fast as soon as there is a difference
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        res = ""
+        for i in range(len(strs[0])):
+            for s in strs:
+                if i == len(s) or s[i] != strs[0][i]:
+                    return res
+            res += strs[0][i]
+        return res
