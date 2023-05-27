@@ -17,6 +17,9 @@ Example 3:
 
 Input: s = "paper", t = "title"
 Output: true
+
+Input: s= "badc", t = "baba"
+Output: false
 '''
 
 
