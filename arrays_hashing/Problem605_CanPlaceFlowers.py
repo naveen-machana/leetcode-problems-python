@@ -11,6 +11,8 @@ Output: true
 Input: flowerbed = [1,0,0,0,1], n = 2
 Output: false
 
+logic: if 3 zeros are in sequence, then can we place a pot in between.
+       also, assume there is an imaginary zero in the beginning and at the end
 '''
 from typing import List
 
