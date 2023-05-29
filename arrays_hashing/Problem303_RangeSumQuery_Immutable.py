@@ -24,9 +24,13 @@ from typing import List
 class NumArray:
 
     def __init__(self, nums: List[int]):
-        self.nums = nums
-        self.prefix_sum = nums.copy()
-        for i in range(1, len(nums)):
-            self.prefix_sum[i] += self.prefix_sum[i - 1]
+        cur = 0
+        self.psum = []
+        for n in nums:
+            cur += n
+            self.psum.append(cur)
+
     def sumRange(self, left: int, right: int) -> int:
-        return self.prefix_sum[right] - (0 if left == 0 else self.prefix_sum[left - 1])
+        r = self.psum[right]
+        l = self.psum[left - 1] if left > 0 else 0
+        return r - l
