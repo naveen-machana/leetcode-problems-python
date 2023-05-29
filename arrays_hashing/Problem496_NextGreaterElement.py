@@ -20,16 +20,14 @@ from typing import List
 
 class Solution:
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        mapping, stack = {}, []
-        for i in range(len(nums2)):
-            while len(stack) > 0 and nums2[i] > stack[0]:
-                mapping[stack.pop(0)] = nums2[i]
-            else:
-                stack.insert(0, nums2[i])
-        while len(stack) > 0:
-            mapping[stack.pop(0)] = -1
-
-        res = []
-        for n in nums1:
-            res.append(mapping[n])
+        indexes = {n : i for i, n in enumerate(nums1)}
+        res = [-1] * len(nums1)
+        stack = []
+        for cur in nums2:
+            while stack and cur > stack[-1]:
+                val = stack[-1]
+                res[indexes[val]] = cur
+                stack.pop()
+            if cur in indexes:
+                stack.append(cur)
         return res
