@@ -7,14 +7,17 @@ typically using all the original letters exactly once.
 Input: s = "anagram", t = "nagaram"
 Output: true
 '''
+import collections
+
+
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         if len(s) != len(t):
             return False
 
-        sCount, tCount = {}, {}
+        sCount, tCount = collections.defaultdict(int), collections.defaultdict(int)
         for i in range(len(s)):
-            sCount[s[i]] = 1 + sCount.get(s[i], 0)
-            tCount[t[i]] = 1 + tCount.get(t[i], 0)
+            sCount[s[i]] += 1
+            tCount[t[i]] += 1
 
         return sCount == tCount
