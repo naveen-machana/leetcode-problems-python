@@ -20,15 +20,13 @@ from typing import List
 
 class Solution:
     def pivotIndex(self, nums: List[int]) -> int:
-        sum = 0
-        for n in nums:
-            sum += n
+        total = sum(nums)
 
-        trail = 0
+        leftSum = 0
         for i in range(len(nums)):
-            sum -= nums[i]
-            if trail == sum:
+            rightSum = total - leftSum - nums[i]
+            if leftSum == rightSum:
                 return i
-            trail += nums[i]
+            leftSum += nums[i]
 
         return -1
