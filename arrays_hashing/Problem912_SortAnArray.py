@@ -14,9 +14,8 @@ from typing import List
 
 class Solution:
 
-    def pivot(self, nums, st, end):
-        p = nums[end]
-        i = st - 1
+    def partition(self, nums, st, end):
+        p, i = nums[end], st - 1
         for j in range(st, end):
             if nums[j] < p:
                 i += 1
@@ -33,7 +32,7 @@ class Solution:
 
     def quick_sort(self, nums, st, end):
         if (st < end):
-            pivot = self.pivot(nums, st, end)
+            pivot = self.partition(nums, st, end)
             self.quick_sort(nums, st, pivot - 1)
             self.quick_sort(nums, pivot + 1, end)
 
