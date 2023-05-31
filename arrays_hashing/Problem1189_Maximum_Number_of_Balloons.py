@@ -30,7 +30,7 @@ class Solution:
                 str_chars[c] -= balloon_count[c]
             res += 1
 
-    def maxNumberOfBalloons2(self, text: str) -> int:
+    def maxNumberOfBalloons(self, text: str) -> int:
         countText = Counter(text)
         balloon = Counter('balloon')
         res = len(text) # or float('inf')
