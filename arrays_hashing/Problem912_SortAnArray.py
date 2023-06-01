@@ -41,3 +41,29 @@ class Solution:
         self.quick_sort(nums, 0, len(nums) - 1)
         return nums
 
+    def merge_sort(self, nums, start, end):
+        if start < end:
+            mid = (start + end)//2
+            self.merge_sort(nums, start, mid)
+            self.merge_sort(nums, mid + 1, end)
+            self.merge(nums, start, mid + 1, end)
+
+    def merge(self, nums, start, mid, end):
+        i, j = start, mid
+        res = []
+        while i < mid and j <= end:
+            if nums[i] <= nums[j]:
+                res.append(nums[i])
+                i += 1
+            else:
+                res.append(nums[j])
+                j += 1
+        while i < mid:
+            res.append(nums[i])
+            i += 1
+        while j <= end:
+            res.append(nums[j])
+            j += 1
+        for k in range(len(res)):
+            nums[k + start] = res[k]
+
