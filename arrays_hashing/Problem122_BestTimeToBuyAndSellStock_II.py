@@ -16,11 +16,7 @@ from typing import List
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         profit = 0
-        cur = prices[0]
-        for val in prices[1:]:
-            if val > cur:
-                profit += val - cur
-                cur = val
-            elif val < cur:
-                cur = val
+        for i in range(1, len(prices)):
+            if prices[i] > prices[i - 1]:
+                profit += (prices[i] - prices[i - 1])
         return profit
