@@ -21,8 +21,7 @@ class Solution:
     def replaceElements(self, arr: List[int]) -> List[int]:
         prev = -1
         for i in range(len(arr) - 1, -1, -1):
-            next = max(arr[i], prev)
+            next = arr[i]
             arr[i] = prev
-            prev = next
-
+            prev = max(prev, next)
         return arr
