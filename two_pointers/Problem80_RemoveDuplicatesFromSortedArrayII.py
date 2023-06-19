@@ -20,3 +20,15 @@ from typing import List
 
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
+        st, end = 0, 0
+        while end < len(nums):
+            count = 1
+            while end + 1 < len(nums) and nums[end] == nums[end + 1]:
+                count += 1
+                end += 1
+
+            for i in range(min(2, count)):
+                nums[st] = nums[end]
+                st += 1
+            end += 1
+        return st + 1
