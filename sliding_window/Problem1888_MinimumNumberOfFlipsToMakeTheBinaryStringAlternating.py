@@ -26,3 +26,29 @@ Explanation: The string is already alternating.
 
 class Solution:
     def minFlips(self, s: str) -> int:
+        n = len(s)
+        s = s + s
+        zeroOne, oneZero = "", ""
+        for i in range(len(s)):
+            zeroOne = zeroOne + ('0' if i % 2 == 0 else '1')
+            oneZero = oneZero + ('1' if i % 2 == 0 else '0')
+        res = n
+        diff1, diff2, l = 0, 0, 0
+        for r in range(len(s)):
+            if s[r] != zeroOne[r]:
+                diff1 += 1
+            if s[r] != oneZero[r]:
+                diff2 += 1
+
+            if r - l + 1 > n:
+                if s[l] != zeroOne[l]:
+                    diff1 -= 1
+                if s[l] != oneZero[l]:
+                    diff2 -= 1
+                l += 1
+
+            if r - l + 1 == n:
+                minDiff = min(diff1, diff2)
+                res = min(res, minDiff)
+
+        return res
