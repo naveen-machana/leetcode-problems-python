@@ -8,19 +8,36 @@ void remove(key) Removes the value key in the HashSet. If key does not exist in 
 '''
 
 
-class MyHashSet:
+class ListNode:
+    def __init__(self, key):
+        self.key = key
+        self.next = None
 
+
+class MyHashSet(object):
     def __init__(self):
-        self.elements = {}
-        self.value = 1
+        self.set = [ListNode(0) for i in range(10 ** 4)]
 
-    def add(self, key: int) -> None:
-        if key not in self.elements:
-            self.elements[key] = self.value
+    def add(self, key):
+        cur = self.set[key % len(self.set)]
+        while cur.next:
+            if cur.next.key == key: return
+            cur = cur.next
 
-    def remove(self, key: int) -> None:
-        if key in self.elements:
-            del self.elements[key]
+        cur.next = ListNode(key)
 
-    def contains(self, key: int) -> bool:
-        return key in self.elements
+    def remove(self, key):
+        cur = self.set[key % len(self.set)]
+        while cur.next:
+            if cur.next.key == key:
+                cur.next = cur.next.next
+                return
+            cur = cur.next
+
+    def contains(self, key):
+        cur = self.set[key % len(self.set)]
+        while cur.next:
+            if cur.next.key == key: return True
+            cur = cur.next
+
+        return False
