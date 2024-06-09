@@ -39,31 +39,32 @@ class MyHashMap:
     def __init__(self):
         self.map = [ListNode() for i in range(1000)]
 
-    def hashcode(self, key):
-        return key % len(self.map)
-
     def put(self, key: int, value: int) -> None:
-        cur = self.map[self.hashcode(key)]
-        while cur.next and cur.next.key != key:
-            cur = cur.next
-        if cur.next and cur.next.key == key:
-            cur.next.value = value
-            return
-        cur.next = ListNode(key, value)
+        ptr = self.map[key % len(self.map)]
+        while ptr.next:
+            if ptr.next.key == key:
+                ptr.next.value = value
+                return
+            ptr = ptr.next
+
+        ptr.next = ListNode(key, value)
 
     def get(self, key: int) -> int:
-        cur = self.map[self.hashcode(key)].next
-        while cur and cur.key != key:
-            cur = cur.next
-        return cur.value if cur else -1
+        ptr = self.map[key % len(self.map)]
+        while ptr.next:
+            if ptr.next.key == key:
+                return ptr.next.value
+            ptr = ptr.next
+        return -1
 
     def remove(self, key: int) -> None:
-        cur = self.map[self.hashcode(key)]
-        while cur and cur.next:
-            if cur.next.key == key:
-                cur.next = cur.next.next
-                break
-            cur = cur.next
+        ptr = self.map[key % len(self.map)]
+        while ptr.next:
+            if ptr.next.key == key:
+                ptr.next = ptr.next.next
+                return
+            ptr = ptr.next
+
 
 
 
