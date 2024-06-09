@@ -25,6 +25,7 @@ Output: false
 class Solution(object):
     def isMonotonic(self, nums):
         incr = nums[0] < nums[-1]
+        # reverse the array if not in increasing order
         if not incr: nums = nums[::-1]
         for i in range(1, len(nums)):
             if nums[i] < nums[i - 1]: return False
