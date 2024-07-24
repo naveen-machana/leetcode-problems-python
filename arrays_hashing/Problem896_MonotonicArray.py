@@ -23,10 +23,22 @@ Output: false
 '''
 
 class Solution(object):
-    def isMonotonic(self, nums):
+    # solution 1
+    '''
+     def isMonotonic(self, nums):
         incr = nums[0] < nums[-1]
         # reverse the array if not in increasing order
         if not incr: nums = nums[::-1]
         for i in range(1, len(nums)):
             if nums[i] < nums[i - 1]: return False
         return True
+    '''
+
+    # solution 2
+    # recommended solution
+    def isMonotonic(self, nums):
+        incr, decr = True, True
+        for i in range(1, len(nums)):
+            if nums[i - 1] > nums[i]: incr = False
+            if nums[i - 1] < nums[i]: decr = False
+        return incr or decr
