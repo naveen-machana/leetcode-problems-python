@@ -10,33 +10,12 @@ Output: true
 Explanation: "amanaplanacanalpanama" is a palindrome.
 '''
 class Solution:
-    def isPalindrome1(self, s: str) -> bool:
-        newStr = ''
-        for c in s:
-            if c.isalnum():
-                newStr += c.lower()
-
-        return newStr == newStr[::-1]
-
     def isPalindrome(self, s: str) -> bool:
+        i, j = 0, len(s) - 1
+        while i < j:
+            while i < j and not s[i].isalnum(): i += 1
+            while i < j and not s[j].isalnum(): j -= 1
+            if i < j and s[i].lower() != s[j].lower(): return False
+            i, j = i + 1, j - 1
 
-        def alphanumeric(char):
-            return (ord('a') <= ord(char) <= ord('z') or
-                    ord('A') <= ord(char) <= ord('Z') or
-                    ord('0') <= ord(char) <= ord('9'))
-
-        st, end = 0, len(s) - 1
-        while st < end:
-            while st < end and not alphanumeric(s[st]): st += 1
-            while st < end and not alphanumeric(s[end]): end -= 1
-            if s[st].lower() != s[end].lower():
-                return False
-            st, end = st + 1, end - 1
         return True
-
-
-
-
-
-
-

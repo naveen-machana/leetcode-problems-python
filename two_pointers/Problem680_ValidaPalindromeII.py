@@ -21,7 +21,7 @@ class Solution:
         while l < r:
             if s[l] != s[r]:
                 skipL, skipR = s[l + 1 : r + 1], s[l : r]
-                return skipL == skipL[::-1] or skipR == skipR[::-1]
+                if skipL == skipL[::-1] or skipR == skipR[::-1]: return True
+                else: return False
             l, r = l + 1, r - 1
         return True
-
