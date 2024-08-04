@@ -31,9 +31,9 @@ from typing import List
 class Solution:
     def minimumDifference(self, nums: List[int], k: int) -> int:
         nums.sort()
-        st, end = 0, k - 1
-        diff = nums[end] - nums[st]
-        while end < len(nums):
-            diff = min(diff, nums[end] - nums[st])
-            st, end = st + 1, end + 1
-        return diff
+        i, j = 0, k - 1
+        res = float('inf')
+        while j < len(nums):
+            res = min(res, nums[j] - nums[i])
+            i, j = i + 1, j + 1
+        return res
